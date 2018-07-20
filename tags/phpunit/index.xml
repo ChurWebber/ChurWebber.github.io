@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Phpunit on ChurWebber</title>
+    <link>https://churwebber.github.io/tags/phpunit/</link>
+    <description>Recent content in Phpunit on ChurWebber</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 23 Feb 2018 11:07:11 +0000</lastBuildDate>
+    
+	<atom:link href="https://churwebber.github.io/tags/phpunit/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PHPUnit 笔记</title>
+      <link>https://churwebber.github.io/post/phpunit-notes/</link>
+      <pubDate>Fri, 23 Feb 2018 11:07:11 +0000</pubDate>
+      
+      <guid>https://churwebber.github.io/post/phpunit-notes/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;当你想把一些东西写到 print 语句或者调试表达式中时，别这么做，将其写成一个测试来代替。&amp;ndash;Martin Fowler&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

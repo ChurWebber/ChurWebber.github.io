@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Redis on ChurWebber</title>
+    <link>https://churwebber.github.io/tags/redis/</link>
+    <description>Recent content in Redis on ChurWebber</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 20 Mar 2018 11:07:11 +0000</lastBuildDate>
+    
+	<atom:link href="https://churwebber.github.io/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Redis教程</title>
+      <link>https://churwebber.github.io/post/redis/</link>
+      <pubDate>Tue, 20 Mar 2018 11:07:11 +0000</pubDate>
+      
+      <guid>https://churwebber.github.io/post/redis/</guid>
+      <description>一、Redis 是什么 二、五种基本类型  1. STRING 2. LIST 3. SET 4. HASH 5. ZSET  三、键的过期时间 四、发布与订阅 五、事务 六、持久化  1. 快照持久化 2. AOF 持久化  七、复制  从服务器连接主服务器的过程 主从链  八、处理故障 九、分片  1. 客户端分片 2. 代理分片 3. 服务器分片  十、事件  事件类型 事件的调度与执行  十一、Redis 与 Memcached 的区别  数据类型 数据持久化 分布式 内存管理机制  十二、Redis 适用场景  缓存 消息队列 计数器 好友关系  十三、数据淘汰策略 十四、一个简单的论坛系统分析  文章信息 点赞功能 对文章进行排序  参考资料   一、Redis 是什么 Redis 是速度非常快的非关系型（NoSQL）内存键值数据库，可以存储键和五种不同类型的值之间的映射。</description>
+    </item>
+    
+  </channel>
+</rss>

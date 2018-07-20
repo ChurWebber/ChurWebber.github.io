@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP改变图片尺寸大小 // ChurWebber</title>
+
+        <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="A blog about everything.">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+        <meta property="og:title" content="PHP改变图片尺寸大小" />
+    <meta property="og:description" content="A blog about everything." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://churwebber.github.io/post/php-change-image-size/" />
+    
+
+    <link href="" rel="alternate" type="application/rss+xml" title="ChurWebber" />
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <link href="https://churwebber.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://churwebber.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://churwebber.github.io/css/style.css">
+
+    <link href="http://gmpg.org/xfn/11" rel="profile">
+    
+    <meta name="generator" content="Hugo 0.42.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://churwebber.github.io/">ChurWebber</a>
+            <nav id="main-nav">
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">PHP改变图片尺寸大小</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/post/php-change-image-size/" class="article-date">
+                <time datetime='2018-03-07T11:07:11.000&#43;00:00' itemprop="datePublished">2018-03-07</time>
+            </a>
+            
+            
+            <div class="post-categories">
+                <div class="article-category">
+                    
+                    
+                    <a class="article-category-link" href="https://churwebber.github.io//categories/php">PHP</a>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="article-comment-link-wrap">
+                <a href="/post/php-change-image-size/#disqus_thread" class="article-comment-link">Comments</a>
+            </div>
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p>改变图片的尺寸是一个很常见的功能需求，下面开始研究下关于PHP改变图片尺寸的方法。先介绍一个自己写的函数。</p>
+
+<pre><code>&lt;?php
+
+$imgsrc = &quot;http://www.nowamagic.net/images/3.jpg&quot;;
+$width = 780;
+$height = 420;
+resizejpg($imgsrc,$imgdst,$width,$height);
+
+function resizejpg($imgsrc,$imgdst,$imgwidth,$imgheight)
+{
+    //$imgsrc jpg格式图像路径 $imgdst jpg格式图像保存文件名 $imgwidth要改变的宽度 $imgheight要改变的高度
+
+    //取得图片的宽度,高度值
+    $arr = getimagesize($imgsrc);                    
+    header(&quot;Content-type: image/jpg&quot;);
+     
+    $imgWidth = $imgwidth;
+    $imgHeight = $imgheight;
+
+    // Create image and define colors
+    $imgsrc = imagecreatefromjpeg($imgsrc);
+    $image = imagecreatetruecolor($imgWidth, $imgHeight);  //创建一个彩色的底图
+    imagecopyresampled($image, $imgsrc, 0, 0, 0, 0,$imgWidth,$imgHeight,$arr[0], $arr[1]);
+    imagepng($image);
+    imagedestroy($image);
+}
+
+?&gt;
+</code></pre>
+
+<p><strong>imagecopyresampled</strong></p>
+
+<p><strong>imagecopyresampled &ndash; 重采样拷贝部分图像并调整大小。</strong></p>
+
+<p><strong>int imagecopyresampled ( resource dst_im, resource src_im, int dstX, int dstY, int srcX, int srcY, int dstW, int dstH, int srcW, int srcH)</strong></p>
+
+<p>imagecopyresampled() 将一幅图像中的一块正方形区域拷贝到另一个图像中，平滑地插入像素值，因此，尤其是，减小了图像的大小而仍然保持了极大的清晰度。dst_im 和 src_im 分别是目标图像和源图像的标识符。如果源和目标的宽度和高度不同，则会进行相应的图像收缩和拉伸。坐标指的是左上角。本函数可用来在同一幅图内部拷贝（如果 dst_im 和 src_im 相同的话）区域，但如果区域交迭的话则结果不可预知。</p>
+
+<p><strong>注</strong>: 因为调色板图像限制（255+1 种颜色）有个问题。重采样或过滤图像通常需要多于 255 种颜色，计算新的被重采样的像素及其颜色时采用了一种近似值。对调色板图像尝试分配一个新颜色时，如果失败我们选择了计算结果最接近（理论上）的颜色。这并不总是视觉上最接近的颜色。这可能会产生怪异的结果，例如空白（或者视觉上是空白）的图像。要跳过这个问题，请使用真彩色图像作为目标图像，例如用 imagecreatetruecolor() 创建的。</p>
+
+<p><strong>注</strong>: imagecopyresampled() 需要 GD 2.0.l 或更高版本。</p>
+
+<p>一个简单的示例：</p>
+
+<pre><code>&lt;?php
+
+// The file
+$filename = 'test.jpg';
+$percent = 0.5;
+
+// Content type
+header('Content-Type: image/jpeg');
+
+// Get new dimensions
+list($width, $height) = getimagesize($filename);
+$new_width = $width * $percent;
+$new_height = $height * $percent;
+
+// Resample
+$image_p = imagecreatetruecolor($new_width, $new_height);
+$image = imagecreatefromjpeg($filename);
+imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+
+// Output
+imagejpeg($image_p, null, 100);
+?&gt;
+</code></pre>
+
+<p>示例2：</p>
+
+<pre><code>&lt;?php
+
+// The file
+$filename = 'test.jpg';
+ 
+// Set a maximum height and width
+$width = 200;
+$height = 200;
+
+// Content type
+header('Content-Type: image/jpeg');
+ 
+// Get new dimensions
+list($width_orig, $height_orig) = getimagesize($filename);
+$ratio_orig = $width_orig/$height_orig;
+ 
+if ($width/$height &gt; $ratio_orig) {
+   $width = $height*$ratio_orig;
+} else {
+   $height = $width/$ratio_orig;
+}
+
+// Resample
+$image_p = imagecreatetruecolor($width, $height);
+$image = imagecreatefromjpeg($filename);
+imagecopyresampled($image_p, $image, 0, 0, 0, 0, $width, $height, $width_orig, $height_orig);
+ 
+// Output
+imagejpeg($image_p, null, 100);
+?&gt;
+</code></pre>
+
+<p>有两种改变图像大小的方法：</p>
+
+<ul>
+<li>ImageCopyResized() 函数在所有GD版本中有效，但其缩放图像的算法比较粗糙。</li>
+<li>ImageCopyResamples()，其像素插值算法得到的图像边缘比较平滑。(但该函数的速度比 ImageCopyResized() 慢)。</li>
+</ul>
+
+<p>两个函数的参数是一样的，如下：</p>
+
+<ul>
+<li>imageCopyResampled(dest,src,dy,dx,sx,sy,dw,dh,sw,sh);</li>
+<li>imageCopyResized(dest,src,dy,dx,sx,sy,dw,dh,sw,sh);</li>
+</ul>
+
+<p>例子：</p>
+
+<pre><code>&lt;?php
+
+$src = ImageCreateFromJPEG('php.jpg');
+$width = ImageSx($src);
+$height = ImageSy($src);
+$x = $widht/2;
+$y = $height/2;
+$dst = ImageCreateTrueColor($x,$y);
+ImageCopyResampled($dst,$src,0,0,0,0,$x,$y,$widht,$height);
+header('Content-Type : image/png');
+ImagePNG($det);
+?&gt;
+</code></pre>
+
+        </div>
+
+        
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://churwebber.github.io//tags/image">IMAGE
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    <nav id="article-nav">
+    
+    <a href="/post/test/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            测试mathjax
+        </div>
+    </a>
+    
+    
+    <a href="/post/html-notes/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">HTML 笔记&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+</article>
+
+        
+            
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 map[name:churwebber gravataremail:churwebber@hotmail.com homepagetext:ChurWebber]&nbsp;
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+</div>
+</body>
+</html>
