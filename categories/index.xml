@@ -11,38 +11,11 @@
     
     
     <item>
-      <title>Html</title>
-      <link>https://churwebber.github.io/categories/html/</link>
-      <pubDate>Fri, 02 Mar 2018 11:03:11 +0000</pubDate>
+      <title>Mysql</title>
+      <link>https://churwebber.github.io/categories/mysql/</link>
+      <pubDate>Thu, 19 Jul 2018 15:03:11 +0000</pubDate>
       
-      <guid>https://churwebber.github.io/categories/html/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Php</title>
-      <link>https://churwebber.github.io/categories/php/</link>
-      <pubDate>Wed, 07 Mar 2018 11:07:11 +0000</pubDate>
-      
-      <guid>https://churwebber.github.io/categories/php/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Redis</title>
-      <link>https://churwebber.github.io/categories/redis/</link>
-      <pubDate>Tue, 20 Mar 2018 11:07:11 +0000</pubDate>
-      
-      <guid>https://churwebber.github.io/categories/redis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Test</title>
-      <link>https://churwebber.github.io/categories/test/</link>
-      <pubDate>Tue, 20 Mar 2018 11:07:11 +0000</pubDate>
-      
-      <guid>https://churwebber.github.io/categories/test/</guid>
+      <guid>https://churwebber.github.io/categories/mysql/</guid>
       <description></description>
     </item>
     
