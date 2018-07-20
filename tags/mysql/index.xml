@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mysql on ChurWebber</title>
+    <link>https://churwebber.github.io/tags/mysql/</link>
+    <description>Recent content in Mysql on ChurWebber</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 19 Jul 2018 15:03:11 +0000</lastBuildDate>
+    
+	<atom:link href="https://churwebber.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>高性能数据库设计原则</title>
+      <link>https://churwebber.github.io/post/high-performance-database-design-principles/</link>
+      <pubDate>Thu, 19 Jul 2018 15:03:11 +0000</pubDate>
+      
+      <guid>https://churwebber.github.io/post/high-performance-database-design-principles/</guid>
+      <description>&lt;h1 id=&#34;一-高性能数据库设计原则&#34;&gt;一. 高性能数据库设计原则&lt;/h1&gt;
+
+&lt;h2 id=&#34;1-数据库逻辑设计的规范化&#34;&gt;1. 数据库逻辑设计的规范化&lt;/h2&gt;
+
+&lt;p&gt;数据库逻辑设计的规范化就是我们一般所说的范式&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;第一范式：没有重复的组或多值的列，这是数据库设计的最低要求&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;第二范式：每个关键字段必须依赖于主关键字，不能依赖于一个组合式主关键字的某些组成部分。消除部分依赖，大部分情况下，数据库设计都应达到第二范式&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;第三范式：一个非关键字段不能依赖于另一个非关键字段。消除传递依赖，达到第三范式应是系统中大部分表的要求，除非一些特殊作用的表&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

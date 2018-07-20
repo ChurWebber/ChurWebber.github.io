@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>高性能数据库设计原则 // ChurWebber</title>
+
+        <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="A blog about everything.">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+        <meta property="og:title" content="高性能数据库设计原则" />
+    <meta property="og:description" content="A blog about everything." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://churwebber.github.io/post/high-performance-database-design-principles/" />
+    
+
+    <link href="" rel="alternate" type="application/rss+xml" title="ChurWebber" />
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <link href="https://churwebber.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://churwebber.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://churwebber.github.io/css/style.css">
+
+    <link href="http://gmpg.org/xfn/11" rel="profile">
+    
+    <meta name="generator" content="Hugo 0.42.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://churwebber.github.io/">ChurWebber</a>
+            <nav id="main-nav">
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">高性能数据库设计原则</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/post/high-performance-database-design-principles/" class="article-date">
+                <time datetime='2018-07-19T15:03:11.000&#43;00:00' itemprop="datePublished">2018-07-19</time>
+            </a>
+            
+            
+            <div class="post-categories">
+                <div class="article-category">
+                    
+                    
+                    <a class="article-category-link" href="https://churwebber.github.io//categories/mysql">MySQL</a>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="article-comment-link-wrap">
+                <a href="/post/high-performance-database-design-principles/#disqus_thread" class="article-comment-link">Comments</a>
+            </div>
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="一-高性能数据库设计原则">一. 高性能数据库设计原则</h1>
+
+<h2 id="1-数据库逻辑设计的规范化">1. 数据库逻辑设计的规范化</h2>
+
+<p>数据库逻辑设计的规范化就是我们一般所说的范式</p>
+
+<ol>
+<li><p>第一范式：没有重复的组或多值的列，这是数据库设计的最低要求</p></li>
+
+<li><p>第二范式：每个关键字段必须依赖于主关键字，不能依赖于一个组合式主关键字的某些组成部分。消除部分依赖，大部分情况下，数据库设计都应达到第二范式</p></li>
+
+<li><p>第三范式：一个非关键字段不能依赖于另一个非关键字段。消除传递依赖，达到第三范式应是系统中大部分表的要求，除非一些特殊作用的表</p></li>
+</ol>
+
+<p></p>
+
+<h2 id="2-反规范化设计">2. 反规范化设计</h2>
+
+<ol>
+<li><p>为了提升性能而使用反规范化设计</p></li>
+
+<li><p>常用方法：</p>
+
+<ol>
+<li>在多个表中存储某个字段的副本，以及字段冗余</li>
+<li>在父表中存储汇总值</li>
+<li>将活动数据和历史数据分来存储（频繁访问修改与不频繁访问修改的数据分开）</li>
+<li>应用程序本地缓存数据</li>
+<li>使用临时表、中间表、索引视图</li>
+</ol></li>
+</ol>
+
+<h2 id="3-合理冗余">3. 合理冗余</h2>
+
+<ol>
+<li><p>完全按照规范化设计的系统几乎是不可能的，除非系统特别小，在规范化设计之后，有计划的加入冗余是必要的</p></li>
+
+<li><p>冗余可以是冗余数据库、冗余表或者冗余字段，不同粒度的冗余可以起到不同的作用</p></li>
+
+<li><p>冗余可以是为了编程方便而增加，也可以是为了性能的提高而增加，从性能的角度来说，冗余数据库可以分散数据库压力，冗余表可以分散数据量大的表的并发压力，也可以加快特殊查询的速度，冗余字段可以有效的减少数据表的连接，提高效率。</p></li>
+</ol>
+
+<h2 id="4-主键设计">4. 主键设计</h2>
+
+<ol>
+<li><p>主键是必要的，SQLSERVER的主键同时是一个唯一索引，而且在实际应用中，我们往往选择最小的键组合作为主键，所以主键往往适合最为表的聚集索引。，聚集索引对查询的影响是比较大的</p></li>
+
+<li><p>在有多个键的表，主键的选择也比较重要，一般选择总的长度小的键，小的键的速度比较快，同时小的键可以使得主键的B树结构的层次更少</p></li>
+
+<li><p>主键的选择还是要注意组合主键的字段次序，对于组合主键来说，不同的字段次序的主键的性能差别可能会很大，一般来说应选择重复率低、单独或者组合查询可能性大的字段放在前面</p></li>
+</ol>
+
+<h2 id="5-外键设计">5. 外键设计</h2>
+
+<p>外键作为数据库对象，很多人认为麻烦而不用，实际上，外键在大部分情况下是很有用的，理由是：</p>
+
+<ol>
+<li><p>外键是一种最高效的一致性维护方法，数据库的一致性要求，依次可以用外键、CHECK约束、规则约束、触发器、客户端程序，一般认为，离数据库越近的方法效率越高</p></li>
+
+<li><p>谨慎使用级联删除和级联更新，级联删除和级联跟新最为sqlserver2000当年的新功能，在2005做了保留，还是有其可用之处，这里所说的谨慎，是因为级联删除和级联更新有些突破了传统的关于外键的定义，功能有点太过强大了，使用之前必须确定自己已经把握好其功能范围，都则级联删除和级联更新可能使你的数据莫名其妙的呗修改或者丢失，从性能上看级联删除和级联更新是比其他方法更高效的方法。</p></li>
+</ol>
+
+<h2 id="6-字段设计">6. 字段设计</h2>
+
+<p>字段是数据库最基本的单位，其设计对性能的影响是很大的，需要注意如下：</p>
+
+<ol>
+<li><p>数据类型尽量用数字型，数字型的比较比字符型的快很多。</p></li>
+
+<li><p>数据类型尽量小，这里的尽量小时指在满足可以预见的未来需求的前提下的</p></li>
+
+<li><p>尽量不要允许NULL，除非必要，可以用NOT NULL+DEFAULT代替</p></li>
+
+<li><p>少用TEXT和IMAGE，二进制字段的读写是比较慢的，而且读取的方法也不多，大部分情况下最好不用</p></li>
+
+<li><p>自增字段要慎用，不利于数据库迁移</p></li>
+</ol>
+
+<h2 id="7-数据库物理存储和环境的设计">7. 数据库物理存储和环境的设计</h2>
+
+<ol>
+<li><p>在设计阶段，可以对数据库的物理存储、操作系统环境、网络环境进行必要的设计，使得我们的系统在将来能适应比较多的而用户并发和比较大的数据量</p></li>
+
+<li><p>需要注意文件组的使用，将数据文件放在不同的文件组上面，文件组可以有效的把I/O操作分散到不同的物理硬盘，提高并发能力</p></li>
+</ol>
+
+<h2 id="8-tempdb的调优">8. TEMPDB的调优</h2>
+
+<ol>
+<li><p>将tempdb存储在自己的磁盘上，而不是放在C盘，并且将数据文件和日志文件分来存储</p></li>
+
+<li><p>为tempdb添加多个数据文件，数量和CPU的数量保持一致</p></li>
+
+<li><p>使用更快速的磁盘</p></li>
+</ol>
+
+<h2 id="9-系统设计">9、系统设计</h2>
+
+<ol>
+<li><p>整个系统的设计，特别是系统结构的设计对性能是有很大影响的，对于一般的OLTP系统，可以选择C/S结构、三层的C/S结构等，不同的系统结构其性能的关键也有所不同</p></li>
+
+<li><p>系统设计阶段应该归纳一些业务逻辑放在数据库编程实现，数据库编程包括数据库存储过程、触发器和函数，用数据库编程实现业务逻辑的好处是减少网络流量并可充分利用数据库的预编译和缓存功能</p></li>
+</ol>
+
+<h2 id="10-索引设计">10、索引设计</h2>
+
+<p>在设计阶段，可以根据功能和性能的需求进行初步的索引设计，这里需要根据预计的数据量和查询来设计索引，可能和将来实际使用的时候会有所区别，关于索引的选择，应该注意：</p>
+
+<ol>
+<li><p>根据数据量决定那些表需要增加索引，数据量小的可以只有主键</p></li>
+
+<li><p>根据使用频率决定哪些字段需要建立索引，选择经常作为连接条件、筛选条件、聚合查询、排序的字段作为索引的候选字段</p></li>
+
+<li><p>把经常一起出现的字段组合在一起，组成组合索引，组合索引的字段顺序与主键一样，也需要把最常用的字段放在前面，把重复率低的字段放在前面</p></li>
+
+<li><p>一个表不要加太多索引</p></li>
+</ol>
+
+<h1 id="二-t-sql算法改进">二. T-SQL算法改进</h1>
+
+<h2 id="1-查询sql只返回需要的列">1. 查询sql只返回需要的列</h2>
+
+<p>以降低网络数据传输量，避免使用 <code>select *</code></p>
+
+<h2 id="2-尽量避免使用下列的连接查询">2. 尽量避免使用下列的连接查询</h2>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">tab1</span> <span class="n">a</span><span class="p">,</span><span class="n">tab2</span> <span class="n">b</span> <span class="k">where</span> <span class="n">a</span><span class="p">.</span><span class="nb">date</span><span class="o">&gt;</span><span class="n">XXX</span> <span class="k">and</span> <span class="n">b</span><span class="p">.</span><span class="k">type</span> <span class="o">=</span> <span class="n">YYY</span> <span class="k">and</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">id</span></code></pre></div>
+<p>原因是连接条件容易遗漏，遗漏之后会产生笛卡尔积，造成严重性能问题。推荐使用下面的写法：</p>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">tab1</span> <span class="n">a</span> <span class="k">inner</span> <span class="k">join</span> <span class="n">tab2</span> <span class="n">b</span> <span class="k">on</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">id</span> <span class="k">where</span>  <span class="n">a</span><span class="p">.</span><span class="nb">date</span><span class="o">&gt;</span><span class="n">XXX</span> <span class="k">and</span> <span class="n">b</span><span class="p">.</span><span class="k">type</span> <span class="o">=</span> <span class="n">YYY</span></code></pre></div>
+<h2 id="3-注意select-into后的where字句">3. 注意select into后的where字句</h2>
+
+<p>因为 <code>select into</code> 把数据插入到临时表，这个过程中系统会锁定一些系统表，如果这个 <code>where</code> 字句返回的数据过多或者速度过慢，会造成系统表的长期锁定，阻塞其他的进程</p>
+
+<h2 id="4-对于聚合查询">4. 对于聚合查询</h2>
+
+<p>使用 <code>having</code> 字句进一步限定返回的行数</p>
+
+<h2 id="5-尽量少做重复的工作">5.尽量少做重复的工作</h2>
+
+<ol>
+<li><p>控制同一语句的多次执行，特别是一些基础数据的多次执行是很多程序员很少注意的</p></li>
+
+<li><p>减少多次的数据转换，也许需要数据转换是设计的问题，但是减少次数是程序猿可以做到的</p></li>
+
+<li><p>杜绝不必要的子查询和连接表，子查询在执行计划中一般解释为外连接，多余的连接表带来额外的开销</p></li>
+
+<li><p>合并对同一表同一条件的多次update</p></li>
+</ol>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">update</span> <span class="n">employee</span> <span class="k">set</span> <span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;haiwer&#39;</span> <span class="k">where</span> <span class="n">emp_id</span> <span class="o">=</span> <span class="s1">&#39;vpa30890f&#39;</span><span class="p">;</span>
+<span class="k">update</span> <span class="n">employee</span> <span class="k">set</span> <span class="n">lname</span> <span class="o">=</span> <span class="s1">&#39;yang&#39;</span> <span class="k">where</span> <span class="n">emp_id</span> <span class="o">=</span> <span class="s1">&#39;vpa30890f&#39;</span><span class="p">;</span></code></pre></div>
+<p>这2句应该合并</p>
+
+<p><strong>注意：update操作不要拆成delete+insert的操作形式，虽然功能相同，但是性能差别很大。不要写一写没有意义的查询，例如：select * from employee where 1=2。</strong></p>
+
+<h2 id="6-注意事务和锁">6. 注意事务和锁</h2>
+
+<p>事务是数据库应用中最重要的工具，它有原子性、一致性、隔离性和持久性这四个属性，很多操作我们都需要利用事务来保证数据的正确性。在使用事务中，我们需要做到尽量避免死锁、尽量减少阻塞，具体以下方面需要特别注意：</p>
+
+<ol>
+<li><p>事务操作过程要尽量小，能拆分的事务要拆分开来</p></li>
+
+<li><p>事务操作过程不应该有交互，因为交互等待的时候，事务并未结束，可能锁定了很多资源</p></li>
+
+<li><p>事务操作过程要按照同一顺序访问对象</p></li>
+
+<li><p>提高事务中每个语句的效率，利用索引和其他方法提高每个语句的效率可以有效的减少整个事务执行的时间</p></li>
+
+<li><p>尽量不要执行锁类型和索引，sqlserver允许我们自己指定语句使用的锁类型和索引，但是一般情况下，sqlserver优化器选择的锁类型和索引是在当前数据量和查询条件下是最优的，我们指定的可能只是在目前情况下最优，但是数据量和数据分布在将来是变化的</p></li>
+
+<li><p>查询是使用较低的隔离级别，特别是报表查询的时候，可以选择最低的隔离级别（未提交读）</p></li>
+</ol>
+
+<h2 id="7-注意临时表和表变量的用法">7. 注意临时表和表变量的用法</h2>
+
+<p>在复杂系统中，临时表和表变量很难避免，关于临时表和表变量的用法，需要注意：</p>
+
+<ol>
+<li><p>如果语句很复杂，连接太多，可以考虑用临时表和表变量分布完成</p></li>
+
+<li><p>如果需要综合多个表的数据，形成一个结果，可以考虑用临时表和表变量分布汇总这多个表的数据</p></li>
+
+<li><p>如果多次用到一个大表的同一部分数据，考虑用临时表和表变量来暂存这部分数据</p></li>
+
+<li><p>其他情况下，应该控制临时表和表变量的使用</p></li>
+
+<li><p>关于临时表产生的时候使用 <code>select into</code> 和 <code>create table</code> + <code>insert into</code> 的选择，我们做过测试，一般情况下 <code>select into</code> 会比 <code>create table</code> + <code>insert into</code> 的方法快很多，但是 <code>select into</code> 会锁定 <code>tempdb</code> 的系统表 <code>sysobjects</code>、<code>sysindex</code>、<code>syscolumns</code>，在多用户并发环境下，容易阻塞其他进程，所以建议在并发系统中，尽量使用 <code>create table</code> + <code>insert into</code>，而大数据量的单个语句中，使用 <code>select into</code></p></li>
+
+<li><p>注意排序规则，用 <code>create table</code> 建立的临时表，如果不指定字段的排序规则，会选择 <code>tempdb</code> 默认的排序规则，而不是当前数据库的排序规则，如果当前数据库的排序规则和 <code>tempdb</code> 的排序规则不同，连接时就会出现排序规则冲突的问题，一般可以在 <code>create table</code> 建立临时表的时候指定字段的排序规则为 <code>datdabase_default</code> 来避免上述问题</p></li>
+</ol>
+
+<h2 id="8-子查询">8、子查询：</h2>
+
+<ol>
+<li><p>子查询可以使得我们的编程灵活多样，可以用来实现一些特殊的功能，但是在性能上，往往一个不合适的子查询用法会形成性能瓶颈</p></li>
+
+<li><p><code>not in</code>、<code>not exists</code> 的相关子查询可以用 <code>left join</code> 来代替</p></li>
+
+<li><p><code>in</code>、<code>exists</code> 的相关子查询可以用 <code>inner join</code> 来代替</p></li>
+
+<li><p><code>in</code> 的相关子查询用 <code>exists</code> 来代替</p></li>
+
+<li><p>不要用 <code>count（*）</code> 的子查询来判断记录是否存在，最好用 <code>left join</code> 或者 <code>exists</code> 来代替</p></li>
+</ol>
+
+<h2 id="9-慎用游标">9、慎用游标</h2>
+
+<ol>
+<li><p>数据库一般的操作是集合操作，也就是对由where子句和选择列确定的结果集做集合操作，游标是提供的一个非集合操作途径。一般情况下，游标实现的一个循环功能往往相当于客户端的一个循环实现的功能，所以大部分情况下，把游标功能搬到客户端。</p></li>
+
+<li><p>游标是把结果集放在服务器内存，并通过循环一条一条处理记录，对数据库资源（特别是对内存和锁资源）的消耗是非常大的，所以我们应该只有在没有其他办法的情况下才使用游标。</p></li>
+
+<li><p>部分场合可以用sqlserver其他的特性来代替游标，比如：某些时候可以用case when来代替游标</p></li>
+</ol>
+
+<h2 id="10-尽量使用索引">10、尽量使用索引</h2>
+
+<ol>
+<li><p>不要对索引字段进行运算，要想办法做变换。比如：<code>select ID from T where num/2 = 100</code> 应变换为 <code>select  ID from T where num=100*2</code></p></li>
+
+<li><p>不要对索引字段进行格式转换</p></li>
+
+<li><p>不要对索引字段使用函数</p></li>
+
+<li><p>不要对索引字段进行多字段连接</p></li>
+</ol>
+
+<h2 id="11-注意连接条件的写法">11、注意连接条件的写法</h2>
+
+<ol>
+<li><p>多表连接的时候，连接条件必须写全，宁可重复不要遗漏</p></li>
+
+<li><p>连接条件尽量使用聚集索引</p></li>
+
+<li><p>注意ON部分条件和where部分条件的区别</p></li>
+</ol>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+<ul>
+<li><a href="#一-高性能数据库设计原则">一. 高性能数据库设计原则</a>
+<ul>
+<li><a href="#1-数据库逻辑设计的规范化">1. 数据库逻辑设计的规范化</a></li>
+<li><a href="#2-反规范化设计">2. 反规范化设计</a></li>
+<li><a href="#3-合理冗余">3. 合理冗余</a></li>
+<li><a href="#4-主键设计">4. 主键设计</a></li>
+<li><a href="#5-外键设计">5. 外键设计</a></li>
+<li><a href="#6-字段设计">6. 字段设计</a></li>
+<li><a href="#7-数据库物理存储和环境的设计">7. 数据库物理存储和环境的设计</a></li>
+<li><a href="#8-tempdb的调优">8. TEMPDB的调优</a></li>
+<li><a href="#9-系统设计">9、系统设计</a></li>
+<li><a href="#10-索引设计">10、索引设计</a></li>
+</ul></li>
+<li><a href="#二-t-sql算法改进">二. T-SQL算法改进</a>
+<ul>
+<li><a href="#1-查询sql只返回需要的列">1. 查询sql只返回需要的列</a></li>
+<li><a href="#2-尽量避免使用下列的连接查询">2. 尽量避免使用下列的连接查询</a></li>
+<li><a href="#3-注意select-into后的where字句">3. 注意select into后的where字句</a></li>
+<li><a href="#4-对于聚合查询">4. 对于聚合查询</a></li>
+<li><a href="#5-尽量少做重复的工作">5.尽量少做重复的工作</a></li>
+<li><a href="#6-注意事务和锁">6. 注意事务和锁</a></li>
+<li><a href="#7-注意临时表和表变量的用法">7. 注意临时表和表变量的用法</a></li>
+<li><a href="#8-子查询">8、子查询：</a></li>
+<li><a href="#9-慎用游标">9、慎用游标</a></li>
+<li><a href="#10-尽量使用索引">10、尽量使用索引</a></li>
+<li><a href="#11-注意连接条件的写法">11、注意连接条件的写法</a></li>
+</ul></li>
+</ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://churwebber.github.io//tags/mysql">MySQL
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    <nav id="article-nav">
+    
+    
+</nav>
+</article>
+
+        
+            
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+</div>
+</body>
+</html>
