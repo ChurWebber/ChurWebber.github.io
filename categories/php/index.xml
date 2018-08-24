@@ -6,32 +6,41 @@
     <description>Recent content in Php on ChurWebber</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Mar 2018 11:07:11 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 30 Jul 2018 15:03:11 +0000</lastBuildDate>
     
 	<atom:link href="https://churwebber.github.io/categories/php/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>PHP改变图片尺寸大小</title>
-      <link>https://churwebber.github.io/post/php-change-image-size/</link>
-      <pubDate>Wed, 07 Mar 2018 11:07:11 +0000</pubDate>
+      <title>PSR规范 PSR-2 编码风格规范</title>
+      <link>https://churwebber.github.io/post/psr-2/</link>
+      <pubDate>Mon, 30 Jul 2018 15:03:11 +0000</pubDate>
       
-      <guid>https://churwebber.github.io/post/php-change-image-size/</guid>
-      <description>改变图片的尺寸是一个很常见的功能需求，下面开始研究下关于PHP改变图片尺寸的方法。先介绍一个自己写的函数。
-&amp;lt;?php $imgsrc = &amp;#34;http://www.nowamagic.net/images/3.jpg&amp;#34;; $width = 780; $height = 420; resizejpg($imgsrc,$imgdst,$width,$height); function resizejpg($imgsrc,$imgdst,$imgwidth,$imgheight) { //$imgsrc jpg格式图像路径 $imgdst jpg格式图像保存文件名 $imgwidth要改变的宽度 $imgheight要改变的高度  //取得图片的宽度,高度值  $arr = getimagesize($imgsrc); header(&amp;#34;Content-type: image/jpg&amp;#34;); $imgWidth = $imgwidth; $imgHeight = $imgheight; // Create image and define colors  $imgsrc = imagecreatefromjpeg($imgsrc); $image = imagecreatetruecolor($imgWidth, $imgHeight); //创建一个彩色的底图  imagecopyresampled($image, $imgsrc, 0, 0, 0, 0,$imgWidth,$imgHeight,$arr[0], $arr[1]); imagepng($image); imagedestroy($image); } ?&amp;gt;  imagecopyresampled
-imagecopyresampled &amp;ndash; 重采样拷贝部分图像并调整大小。
-int imagecopyresampled ( resource dst_im, resource src_im, int dstX, int dstY, int srcX, int srcY, int dstW, int dstH, int srcW, int srcH)</description>
+      <guid>https://churwebber.github.io/post/psr-2/</guid>
+      <description>&lt;h1 id=&#34;编码风格指南&#34;&gt;编码风格指南&lt;/h1&gt;
+
+&lt;p&gt;本篇规范是 [PSR-1][] 基本代码规范的继承与扩展。&lt;/p&gt;
+
+&lt;p&gt;本规范希望通过制定一系列规范化PHP代码的规则，以减少在浏览不同作者的代码时，因代码风格的不同而造成不便。&lt;/p&gt;
+
+&lt;p&gt;当多名程序员在多个项目中合作时，就需要一个共同的编码规范，&lt;/p&gt;
+
+&lt;p&gt;而本文中的风格规范源自于多个不同项目代码风格的共同特性，&lt;/p&gt;
+
+&lt;p&gt;因此，本规范的价值在于我们都遵循这个编码风格，而不是在于它本身。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>PHPUnit 笔记</title>
-      <link>https://churwebber.github.io/post/phpunit-notes/</link>
-      <pubDate>Fri, 23 Feb 2018 11:07:11 +0000</pubDate>
+      <title>PSR规范 PSR-1 基础编码规范</title>
+      <link>https://churwebber.github.io/post/psr-1/</link>
+      <pubDate>Mon, 23 Jul 2018 15:03:11 +0000</pubDate>
       
-      <guid>https://churwebber.github.io/post/phpunit-notes/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;当你想把一些东西写到 print 语句或者调试表达式中时，别这么做，将其写成一个测试来代替。&amp;ndash;Martin Fowler&lt;/p&gt;
-&lt;/blockquote&gt;
+      <guid>https://churwebber.github.io/post/psr-1/</guid>
+      <description>&lt;h1 id=&#34;基本代码规范&#34;&gt;基本代码规范&lt;/h1&gt;
+
+&lt;p&gt;本篇规范制定了代码基本元素的相关标准，以确保共享的PHP代码间具有较高程度的技术互通性。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
