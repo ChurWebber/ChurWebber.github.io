@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PSR规范 PSR-1 基础编码规范 // ChurWebber</title>
+
+        <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="A blog about everything.">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+        <meta property="og:title" content="PSR规范 PSR-1 基础编码规范" />
+    <meta property="og:description" content="A blog about everything." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://churwebber.github.io/post/psr-1/" />
+    
+
+    <link href="" rel="alternate" type="application/rss+xml" title="ChurWebber" />
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <link href="https://churwebber.github.iowebfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://churwebber.github.iowebfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://churwebber.github.iocss/style.css">
+
+    <link href="http://gmpg.org/xfn/11" rel="profile">
+    
+    <meta name="generator" content="Hugo 0.42.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://churwebber.github.io">ChurWebber</a>
+            <nav id="main-nav">
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">PSR规范 PSR-1 基础编码规范</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/post/psr-1/" class="article-date">
+                <time datetime='2018-07-23T15:03:11.000&#43;00:00' itemprop="datePublished">2018-07-23</time>
+            </a>
+            
+            
+            <div class="post-categories">
+                <div class="article-category">
+                    
+                    
+                    <a class="article-category-link" href="https://churwebber.github.io/categories/php">PHP</a>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="article-comment-link-wrap">
+                <a href="/post/psr-1/#disqus_thread" class="article-comment-link">Comments</a>
+            </div>
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="基本代码规范">基本代码规范</h1>
+
+<p>本篇规范制定了代码基本元素的相关标准，以确保共享的PHP代码间具有较高程度的技术互通性。</p>
+
+<p></p>
+
+<h1 id="关于-能愿动词-的使用">关于「能愿动词」的使用</h1>
+
+<p>为了避免歧义，文档大量使用了「能愿动词」，对应的解释如下：</p>
+
+<ul>
+<li><code>必须 (MUST)</code>：绝对，严格遵循，请照做，无条件遵守；</li>
+<li><code>一定不可 (MUST NOT)</code>：禁令，严令禁止；</li>
+<li><code>应该 (SHOULD)</code> ：强烈建议这样做，但是不强求；</li>
+<li><code>不该 (SHOULD NOT)</code>：强烈不建议这样做，但是不强求；</li>
+<li><code>可以 (MAY)</code> 和 <code>可选 (OPTIONAL)</code> ：选择性高一点，在这个文档内，此词语使用较少；</li>
+</ul>
+
+<blockquote>
+<p>参见：<a href="http://www.ietf.org/rfc/rfc2119.txt">RFC 2119</a></p>
+</blockquote>
+
+<h1 id="1-概览">1. 概览</h1>
+
+<ul>
+<li><p>PHP代码文件 <strong>必须</strong> 以 <code>&lt;?php</code> 或 <code>&lt;?=</code> 标签开始；</p></li>
+
+<li><p>PHP代码文件 <strong>必须</strong> 以 <code>不带 BOM 的 UTF-8</code> 编码；</p></li>
+
+<li><p>PHP代码中 <strong>应该</strong> 只定义类、函数、常量等声明，或其他会产生 <code>副作用</code> 的操作（如：生成文件输出以及修改 .ini 配置文件等），二者只能选其一；</p></li>
+
+<li><p>命名空间以及类 <strong>必须</strong> 符合 PSR 的自动加载规范：[PSR-4]() 中的一个；</p></li>
+
+<li><p>类的命名 <strong>必须</strong> 遵循 StudlyCaps 大写开头的驼峰命名规范；</p></li>
+
+<li><p>类中的常量所有字母都 <strong>必须</strong> 大写，单词间用下划线分隔；</p></li>
+
+<li><p>方法名称 <strong>必须</strong> 符合 camelCase 式的小写开头驼峰命名规范。</p></li>
+</ul>
+
+<h1 id="2-文件">2. 文件</h1>
+
+<h2 id="2-1-php标签">2.1. PHP标签</h2>
+
+<p>PHP代码 <strong>必须</strong> 使用 <code>&lt;?php ?&gt;</code> 长标签 或 <code>&lt;?= ?&gt;</code> 短输出标签；</p>
+
+<p><strong>一定不可</strong> 使用其它自定义标签。</p>
+
+<h2 id="2-2-字符编码">2.2. 字符编码</h2>
+
+<p>PHP代码 <strong>必须</strong> 且只可使用 <code>不带BOM的UTF-8</code> 编码。</p>
+
+<h2 id="2-3-副作用">2.3. 副作用</h2>
+
+<p>一份 PHP 文件中 <strong>应该</strong> 要不就只定义新的声明，如类、函数或常量等不产生 <code>副作用</code> 的操作，要不就只书写会产生 <code>副作用</code> 的逻辑操作，但 <strong>不该</strong> 同时具有两者。</p>
+
+<p>「副作用」(side effects) 一词的意思是，仅仅通过包含文件，不直接声明类、函数和常量等，而执行的逻辑操作。</p>
+
+<p>「副作用」包含却不仅限于：</p>
+
+<ul>
+<li><p>生成输出</p></li>
+
+<li><p>直接的 <code>require</code> 或 <code>include</code></p></li>
+
+<li><p>连接外部服务</p></li>
+
+<li><p>修改 ini 配置</p></li>
+
+<li><p>抛出错误或异常</p></li>
+
+<li><p>修改全局或静态变量</p></li>
+
+<li><p>读或写文件等</p></li>
+</ul>
+
+<p>以下是一个 <code>反例</code>，一份包含「函数声明」以及产生「副作用」的代码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// 「副作用」：修改 ini 配置
+</span><span class="c1"></span><span class="nx">ini_set</span><span class="p">(</span><span class="s1">&#39;error_reporting&#39;</span><span class="p">,</span> <span class="k">E_ALL</span><span class="p">);</span>
+
+<span class="c1">// 「副作用」：引入文件
+</span><span class="c1"></span><span class="k">include</span> <span class="s2">&#34;file.php&#34;</span><span class="p">;</span>
+
+<span class="c1">// 「副作用」：生成输出
+</span><span class="c1"></span><span class="k">echo</span> <span class="s2">&#34;&lt;html&gt;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">;</span>
+
+<span class="c1">// 声明函数
+</span><span class="c1"></span><span class="k">function</span> <span class="nf">foo</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// 函数主体部分
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></div>
+<p>下面是一个范例，一份只包含声明不产生「副作用」的代码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// 声明函数
+</span><span class="c1"></span><span class="k">function</span> <span class="nf">foo</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// 函数主体部分
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="c1">// 条件声明 **不** 属于「副作用」
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nx">function_exists</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">function</span> <span class="nf">bar</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// 函数主体部分
+</span><span class="c1"></span>    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="3-命名空间和类">3. 命名空间和类</h1>
+
+<p>命名空间以及类的命名必须遵循 [PSR-4]()。</p>
+
+<p>根据规范，每个类都独立为一个文件，且命名空间至少有一个层次：顶级的组织名称（vendor name）。</p>
+
+<p>类的命名 <strong>必须</strong> 遵循 <code>StudlyCaps</code> 大写开头的驼峰命名规范。</p>
+
+<p>PHP 5.3 及以后版本的代码 <strong>必须</strong> 使用正式的命名空间。</p>
+
+<p>例如：</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// PHP 5.3及以后版本的写法
+</span><span class="c1"></span><span class="k">namespace</span> <span class="nx">Vendor\Model</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Foo</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>5.2.x 及之前的版本 <strong>应该</strong> 使用伪命名空间的写法，约定俗成使用顶级的组织名称（vendor name）如 <code>Vendor_</code> 为类前缀。</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="c1">// 5.2.x及之前版本的写法
+</span><span class="c1"></span><span class="k">class</span> <span class="nc">Vendor_Model_Foo</span>
+<span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div>
+<h1 id="4-类的常量-属性和方法">4. 类的常量、属性和方法</h1>
+
+<p>此处的「类」指代所有的类、接口以及可复用代码块（traits）。</p>
+
+<h2 id="4-1-常量">4.1. 常量</h2>
+
+<p>类的常量中所有字母都 <strong>必须</strong> 大写，词间以下划线分隔。</p>
+
+<p>参照以下代码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">Vendor\Model</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Foo</span>
+<span class="p">{</span>
+    <span class="k">const</span> <span class="no">VERSION</span> <span class="o">=</span> <span class="s1">&#39;1.0&#39;</span><span class="p">;</span>
+    <span class="k">const</span> <span class="no">DATE_APPROVED</span> <span class="o">=</span> <span class="s1">&#39;2012-06-01&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="4-2-属性">4.2. 属性</h2>
+
+<p>类的属性命名 <strong>可以</strong> 遵循：</p>
+
+<ul>
+<li><p>大写开头的驼峰式 (<code>$StudlyCaps</code>)</p></li>
+
+<li><p>小写开头的驼峰式 (<code>$camelCase</code>)</p></li>
+
+<li><p>下划线分隔式 (<code>$under_score</code>)</p></li>
+</ul>
+
+<p>本规范不做强制要求，但无论遵循哪种命名方式，都 <strong>应该</strong> 在一定的范围内保持一致。这个范围可以是整个团队、整个包、整个类或整个方法。</p>
+
+<h2 id="4-3-方法">4.3. 方法</h2>
+
+<p>方法名称 <strong>必须</strong> 符合 <code>camelCase()</code> 式的小写开头驼峰命名规范。</p>
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+<ul>
+<li><a href="#基本代码规范">基本代码规范</a></li>
+<li><a href="#关于-能愿动词-的使用">关于「能愿动词」的使用</a></li>
+<li><a href="#1-概览">1. 概览</a></li>
+<li><a href="#2-文件">2. 文件</a>
+<ul>
+<li><a href="#2-1-php标签">2.1. PHP标签</a></li>
+<li><a href="#2-2-字符编码">2.2. 字符编码</a></li>
+<li><a href="#2-3-副作用">2.3. 副作用</a></li>
+</ul></li>
+<li><a href="#3-命名空间和类">3. 命名空间和类</a></li>
+<li><a href="#4-类的常量-属性和方法">4. 类的常量、属性和方法</a>
+<ul>
+<li><a href="#4-1-常量">4.1. 常量</a></li>
+<li><a href="#4-2-属性">4.2. 属性</a></li>
+<li><a href="#4-3-方法">4.3. 方法</a></li>
+</ul></li>
+</ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://churwebber.github.io/tags/psr">PSR
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    <nav id="article-nav">
+    
+    <a href="/post/psr-2/" id="article-nav-newer" class="article-nav-link-wrap">
+        <div class="article-nav-title"><span>&lt;</span>&nbsp;
+            PSR规范 PSR-2 编码风格规范
+        </div>
+    </a>
+    
+    
+    <a href="/post/high-performance-database-design-principles/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">高性能数据库设计原则&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+</article>
+
+        
+            
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+</div>
+</body>
+</html>
