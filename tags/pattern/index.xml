@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pattern on ChurWebber</title>
+    <link>https://churwebber.github.io/tags/pattern/</link>
+    <description>Recent content in Pattern on ChurWebber</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 26 Dec 2018 16:03:11 +0000</lastBuildDate>
+    
+	<atom:link href="https://churwebber.github.io/tags/pattern/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>简单工厂模式-Simple Factory Pattern</title>
+      <link>https://churwebber.github.io/post/simple-factory-pattern/</link>
+      <pubDate>Wed, 26 Dec 2018 16:03:11 +0000</pubDate>
+      
+      <guid>https://churwebber.github.io/post/simple-factory-pattern/</guid>
+      <description>&lt;p&gt;工厂模式是最常用的一类创建型设计模式，通常我们所说的工厂模式是指&lt;strong&gt;工厂方法模式&lt;/strong&gt;，它也是使用频率最高的工厂模式。本章将要学习的&lt;strong&gt;简单工厂模式&lt;/strong&gt;是工厂方法模式的“小弟”，它不属于GoF 23种设计模式，但在软件开发中应用也较为频繁，通常将它作为学习其他工厂模式的入门。此外，工厂方法模式还有一位“大哥”——&lt;strong&gt;抽象工厂模式&lt;/strong&gt;。这三种工厂模式各具特色，难度也逐个加大，在软件开发中它们都得到了广泛的应用，成为面向对象软件中常用的创建对象的工具。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
