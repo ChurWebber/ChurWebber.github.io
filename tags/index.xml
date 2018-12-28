@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on ChurWebber</title>
+    <title>Tags on 编程笔记</title>
     <link>https://churwebber.github.io/tags/</link>
-    <description>Recent content in Tags on ChurWebber</description>
+    <description>Recent content in Tags on 编程笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 19 Jul 2018 15:03:11 +0000</lastBuildDate>
@@ -23,7 +23,7 @@
     <item>
       <title>Pattern</title>
       <link>https://churwebber.github.io/tags/pattern/</link>
-      <pubDate>Wed, 26 Dec 2018 16:03:11 +0000</pubDate>
+      <pubDate>Mon, 27 Aug 2018 16:03:11 +0000</pubDate>
       
       <guid>https://churwebber.github.io/tags/pattern/</guid>
       <description></description>
