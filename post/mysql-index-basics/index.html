@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MYSQL索引基础知识 // 编程笔记</title>
+
+        <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="A blog about everything.">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+        <meta property="og:title" content="MYSQL索引基础知识" />
+    <meta property="og:description" content="A blog about everything." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://oquamnib.github.io/post/mysql-index-basics/" />
+    
+
+    <link href="" rel="alternate" type="application/rss+xml" title="编程笔记" />
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <link href="https://oquamnib.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://oquamnib.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://oquamnib.github.io/css/style.css">
+
+    <link href="http://gmpg.org/xfn/11" rel="profile">
+    
+    <meta name="generator" content="Hugo 0.42.1" />
+</head>
+
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://oquamnib.github.io/">编程笔记</a>
+            <nav id="main-nav">
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+    <section id="main" class="outer">
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        <header class="article-header">
+            <h1 class="article-title" itemprop="name">MYSQL索引基础知识</h1>
+        </header>
+        
+        <div class="article-meta">
+            <a href="/post/mysql-index-basics/" class="article-date">
+                <time datetime='2019-01-08T15:03:11.000&#43;00:00' itemprop="datePublished">2019-01-08</time>
+            </a>
+            
+            
+            <div class="post-categories">
+                <div class="article-category">
+                    
+                    
+                    <a class="article-category-link" href="https://oquamnib.github.io//categories/mysql">MySQL</a>
+                    
+                </div>
+            </div>
+            
+            
+            <div class="article-comment-link-wrap">
+                <a href="/post/mysql-index-basics/#disqus_thread" class="article-comment-link">Comments</a>
+            </div>
+            
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            
+
+<h1 id="一-mysql索引类型">一. MySQL索引类型：</h1>
+
+<h2 id="1-普通索引">1. 普通索引</h2>
+
+<p>这是最基本的索引类型，而且它没有唯一性之类的限制。普通索引可以通过以下几种方式创建：</p>
+
+<ul>
+<li><strong>创建索引</strong>，例如 <code>CREATE INDEX &lt;索引的名字&gt; ON tablename (列的列表)</code>;</li>
+<li><strong>修改表</strong>，例如 <code>ALTER TABLE tablename ADD INDEX [索引的名字] (列的列表)</code>;</li>
+<li><strong>创建表的时候指定索引</strong>，例如 <code>CREATE TABLE tablename ( [...], INDEX [索引的名字] (列的列表) )</code>;</li>
+</ul>
+
+<h2 id="2-唯一性索引">2. 唯一性索引</h2>
+
+<p>这种索引和前面的“普通索引”基本相同，但有一个区别：索引列的所有值都只能出现一次，即必须唯一。唯一性索引可以用以下几种方式创建：</p>
+
+<ul>
+<li><strong>创建索引</strong>，例如 <code>CREATE UNIQUE INDEX &lt;索引的名字&gt; ON tablename (列的列表)</code>;</li>
+<li><strong>修改表</strong>，例如 <code>ALTER TABLE tablename ADD UNIQUE [索引的名字] (列的列表)</code>;</li>
+<li><strong>创建表的时候指定索引</strong>，例如 <code>CREATE TABLE tablename ( [...], UNIQUE [索引的名字] (列的列表) )</code>;</li>
+</ul>
+
+<h2 id="3-主键">3. 主键</h2>
+
+<p>主键是一种唯一性索引，但它必须指定为“PRIMARY KEY”。如果你曾经用过AUTO_INCREMENT类型的列，你可能已经熟悉主键之类的概念了。
+主键一般在创建表的时候指定，例如“CREATE TABLE tablename ( [&hellip;], PRIMARY KEY (列的列表) ); ”。
+但是，我们也可以通过修改表的方式加入主键，例如“ALTER TABLE tablename ADD PRIMARY KEY (列的列表); ”。每个表只能有一个主键。</p>
+
+<h2 id="4-全文索引">4. 全文索引</h2>
+
+<p>MySQL从3.23.23版开始支持全文索引和全文检索。在MySQL中，全文索引的索引类型为FULLTEXT。全文索引可以在VARCHAR或者TEXT类型的列上创建。
+它可以通过CREATE TABLE命令创建，也可以通过ALTER TABLE或CREATE INDEX命令创建。
+对于大规模的数据集，通过ALTER TABLE（或者CREATE INDEX）命令创建全文索引要比把记录插入带有全文索引的空表更快。</p>
+
+<h1 id="二-单列索引与多列索引">二、单列索引与多列索引</h1>
+
+<p>索引可以是单列索引，也可以是多列索引。假设有这样一个people表：</p>
+
+<pre><code>CREATE TABLE people ( 
+peopleid SMALLINT NOT NULL AUTO_INCREMENT, 
+firstname CHAR(50) NOT NULL,
+lastname CHAR(50) NOT NULL, 
+age SMALLINT NOT NULL, 
+townid SMALLINT NOT NULL,
+PRIMARY KEY (peopleid) );
+</code></pre>
+
+<p>查找姓名为Mike Sullivan、年龄17岁用户的peopleid
+SQL命令为</p>
+
+<pre><code>SELECT peopleid FROM people WHERE firstname='Mike' AND lastname='Sullivan' AND age=17;
+</code></pre>
+
+<p>由于我们不想让MySQL每次执行查询就去扫描整个表，这里需要考虑运用索引。</p>
+
+<p>首先，我们可以考虑在单个列上创建索引，比如<code>firstname</code>、<code>lastname</code>或者<code>age</code> 列。如果我们创建<code>firstname</code>列的索引</p>
+
+<pre><code>ALTER TABLE people ADD INDEX firstname (firstname);
+</code></pre>
+
+<p>MySQL将通过这个索引迅速把搜索范围限制到那些firstname=&lsquo;Mike&rsquo;的记录，然后再在这个“中间结果集”上进行其他条件的搜索：
+它首先排除那些lastname不等于“Sullivan”的记录，然后排除那些age不等于17的记录。当记录满足所有搜索条件之后，MySQL就返回最终的搜索结果。</p>
+
+<p>由于建立了firstname列的索引，与执行表的完全扫描相比，MySQL的效率提高了很多，
+但MySQL扫描的记录数量仍旧远远超过了实际所需要的。虽然可以删除firstname列上的索引，再创建lastname或者age列的索引，但总地看来，不论在哪个列上创建索引搜索效率仍旧相似。</p>
+
+<p>为了提高搜索效率，需要考虑运用多列索引。如果为firstname、lastname和age这三个列创建一个多列索引，
+MySQL只需一次检索就能够找出正确的结果！下面是创建这个多列索引的SQL命令：</p>
+
+<pre><code>ALTER TABLE people ADD INDEX fname_lname_age (firstname,lastname,age);
+</code></pre>
+
+<p>由于索引文件以B-树格式保存，MySQL能够立即转到合适的firstname，然后再转到合适的lastname，最后转到合适的age。
+在没有扫描数据文件任何一个记录的情况下，MySQL就正确地找出了搜索的目标记录！</p>
+
+<p>那么，如果在firstname、lastname、age这三个列上分别创建单列索引，效果是否和创建一个firstname、lastname、age的多列索引一样呢？
+答案是否定的，两者完全不同。当我们执行查询的时候，MySQL只能使用一个索引。如果你有三个单列的索引，MySQL会试图选择一个限制最严格的索引。
+但是，即使是限制最严格的单列索引，它的限制能力也肯定远远低于firstname、lastname、age这三个列上的多列索引。</p>
+
+<h2 id="1-最左前缀">1. 最左前缀</h2>
+
+<p>多列索引还有另外一个优点，它通过称为最左前缀（Leftmost Prefixing）的概念体现出来。
+继续考虑前面的例子，现在有一个firstname、lastname、age列上的多列索引，当搜索条件是以下各种列的组合时，MySQL将使用fname_lname_age索引：</p>
+
+<pre><code>firstname，lastname，age 
+firstname，lastname 
+firstname 
+</code></pre>
+
+<p>从另一方面理解，它相当于创建了(firstname，lastname，age)、(firstname，lastname)以及(firstname)这些列组合上的索引。下面这些查询都能够使用这个fname_lname_age索引：</p>
+
+<pre><code>SELECT peopleid FROM people WHERE firstname='Mike' AND lastname='Sullivan' AND age='17'; 
+SELECT peopleid FROM people WHERE firstname='Mike' AND lastname='Sullivan'; 
+SELECT peopleid FROM people WHERE firstname='Mike';
+</code></pre>
+
+<p>下面的查询就完全不能使用这个索引:</p>
+
+<pre><code>SELECT peopleid FROM people WHERE lastname='Sullivan'; 
+SELECT peopleid FROM people WHERE age='17'; 
+SELECT peopleid FROM people WHERE lastname='Sullivan' AND age='17'; 
+</code></pre>
+
+<h2 id="2-选择索引列">2. 选择索引列</h2>
+
+<p>在性能优化过程中，选择在哪些列上创建索引是最重要的步骤之一。可以考虑使用索引的主要有两种类型的列：在WHERE子句中出现的列，在join子句中出现的列。请看下面这个查询：</p>
+
+<pre><code>SELECT age 
+FROM people WHERE firstname='Mike' 
+AND lastname='Sullivan' 
+</code></pre>
+
+<p>这个查询与前面的查询略有不同，但仍属于简单查询。由于age是在SELECT部分被引用，MySQL不会用它来限制列选择操作。因此，对于这个查询来说，创建age列的索引没有什么必要。
+下面是一个更复杂的例子：</p>
+
+<pre><code>SELECT people.age, 
+town.name
+FROM people LEFT JOIN town ON 
+people.townid=town.townid
+WHERE firstname='Mike'
+AND lastname='Sullivan'
+</code></pre>
+
+<p>与前面的例子一样，由于firstname和lastname出现在WHERE子句中，因此这两个列仍旧有创建索引的必要。除此之外，由于town表的townid列出现在join子句中，因此需要考虑创建该列的索引。</p>
+
+<p>那么，是否可以简单地认为应该索引WHERE子句和join子句中出现的每一个列呢？差不多如此，但并不完全。
+还必须考虑到对列进行比较的操作符类型。MySQL只有对以下操作符才使用索引：&lt;，&lt;=，=，&gt;，&gt;=，BETWEEN，IN，
+以及某些时候的LIKE。可以在LIKE操作中使用索引的情形是指另一个操作数不是以通配符（%或者_）开头的情形。
+例如，“SELECT peopleid FROM people WHERE firstname LIKE &lsquo;Mich%&rsquo;;”这个查询将使用索引，
+但“SELECT peopleid FROM people WHERE firstname LIKE &lsquo;%ike&rsquo;;”这个查询不会使用索引。</p>
+
+<h2 id="3-分析索引效率">3. 分析索引效率</h2>
+
+<p>现在我们已经知道了一些如何选择索引列的知识，但还无法判断哪一个最有效。MySQL提供了一个内建的SQL命令帮助我们完成这个任务，这就是EXPLAIN命令。EXPLAIN命令的一般语法是：EXPLAIN 。
+你可以在MySQL文档找到有关该命令的更多说明。下面是一个例子：</p>
+
+<pre><code>EXPLAIN SELECT peopleid FROM people WHERE firstname='Mike' AND lastname='Sullivan' AND age='17'; 
+</code></pre>
+
+<p>这个命令将返回下面这种分析结果：</p>
+
+<p>下面我们就来看看这个EXPLAIN分析结果的含义。</p>
+
+<p>table：这是表的名字。
+type：连接操作的类型。下面是MySQL文档关于ref连接类型的说明：</p>
+
+<p>“对于每一种与另一个表中记录的组合，MySQL将从当前的表读取所有带有匹配索引值的记录。如果连接操作只使用键的最左前缀，或者如果键不是UNIQUE或PRIMARY KEY类型（换句话说，如果连接操作不能根据键值选择出唯一行），则MySQL使用ref连接类型。如果连接操作所用的键只匹配少量的记录，则ref是一种好的连接类型。”</p>
+
+<p>在本例中，由于索引不是UNIQUE类型，ref是我们能够得到的最好连接类型。</p>
+
+<p>如果EXPLAIN显示连接类型是“ALL”，而且你并不想从表里面选择出大多数记录，那么MySQL的操作效率将非常低，因为它要扫描整个表。你可以加入更多的索引来解决这个问题。预知更多信息，请参见MySQL的手册说明。</p>
+
+<p>possible_keys：
+可能可以利用的索引的名字。这里的索引名字是创建索引时指定的索引昵称；如果索引没有昵称，则默认显示的是索引中第一个列的名字（在本例中，它是“firstname”）。默认索引名字的含义往往不是很明显。</p>
+
+<p>Key：
+它显示了MySQL实际使用的索引的名字。如果它为空（或NULL），则MySQL不使用索引。</p>
+
+<p>key_len：
+索引中被使用部分的长度，以字节计。在本例中，key_len是102，其中firstname占50字节，lastname占50字节，age占2字节。如果MySQL只使用索引中的firstname部分，则key_len将是50。</p>
+
+<p>ref：
+它显示的是列的名字（或单词“const”），MySQL将根据这些列来选择行。在本例中，MySQL根据三个常量选择行。</p>
+
+<p>rows：
+MySQL所认为的它在找到正确的结果之前必须扫描的记录数。显然，这里最理想的数字就是1。</p>
+
+<p>Extra：
+这里可能出现许多不同的选项，其中大多数将对查询产生负面影响。在本例中，MySQL只是提醒我们它将用WHERE子句限制搜索结果集。</p>
+
+<p>索引的缺点
+到目前为止，我们讨论的都是索引的优点。事实上，索引也是有缺点的。</p>
+
+<p>首先，索引要占用磁盘空间。通常情况下，这个问题不是很突出。但是，如果你创建每一种可能列组合的索引，索引文件体积的增长速度将远远超过数据文件。
+如果你有一个很大的表，索引文件的大小可能达到操作系统允许的最大文件限制。</p>
+
+<p>第二，对于需要写入数据的操作，比如DELETE、UPDATE以及INSERT操作，索引会降低它们的速度。这是因为MySQL不仅要把改动数据写入数据文件，而且它还要把这些改动写入索引文件。</p>
+
+<p>三、选择索引的准则
+1、搜索的索引列，不一定是所要选择的列
+换句话说，最适合索引的列是出现在 WHERE 子句中的列，或连接子句中指定的列，而不是出现在 SELECT 关键字后的选择列表中的列，例如：
+SELECT
+col_a ←不适合作索引列
+FROM
+Tbl1 LEFT JOIN tbl2
+ON tbl1.col_b = tbl2.col_c ←适合作索引列
+WHERE
+col_d = expr ←适合作索引列
+当然，所选择的列和用于 WHERE 子句的列也可能是相同的。关键是，列出现在选择列表中不是该列应该索引的标志。
+出现在连接子句中的列或出现在形如 col1 = col2 的表达式中的列是很适合索引的列。查询中的 col_b 和 col_c 就是这样的例子。
+如果 MySQL 能利用连接列来优化一个查询，表示它通过消除全表扫描相当可观地减少了表行的组合。
+2、使用惟一索引
+考虑某列中值的分布。对于惟一值的列，索引的效果最好，而具有多个重复值的列，其索引效果最差。例如，存放年龄的列具有不同值，很容易区分各行。
+而用来记录性别的列，只含有“M”和“F”，则对此列进行索引没有多大用处（不管搜索哪个值，都会得出大约一半的行）。
+3、使用短索引
+如 果对串列进行索引，应该指定一个前缀长度，只要有可能就应该这样做。例如，如果有一个 CHAR(200) 列，如果在前 10 个或 20 个字符内，多数值是惟一的，
+那么就不要对整个列进行索引。对前 10 个或 20 个字符进行索引能够节省大量索引空间，也可能会使查询更快。
+较小的索引涉及的磁盘 I/O 较少，较短的值比较起来更快。更为重要的是，对于较短的键值，索引高速缓存中的块能容纳更多的键值，
+因此，MySQL 也可以在内存中容纳更多的值。这增加了找到行而不用读取索引中较多块的可能性。
+（当然，应该利用一些常识。如仅用列值的第一个字符进行索引是不可能有多大好处的，因为这个索引中不会有许多不同的值。）
+4、利用最左前缀
+在创建一个 n 列的索引时，实际是创建了 MySQL 可利用的 n 个索引。多列索引可起几个索引的作用，因为可利用索引中最左边的列集来匹配行。这样的列集称为最左前缀。
+（这与索引一个列的前缀不同，索引一个列的前缀是利用该的前 n 个字符作为索引值。）
+假如一个表在分别名为 state、city 和 zip 的三个列上有一个索引。
+索引中的行是按 state/city/zip 的次序存放的，因此，索引中的行也会自动按 state/city 的顺序和 state 的顺序存放。这表示，即使在查询中只指定 state 值或只指定 state 和 city 的值，
+MySQL 也可以利用索引。
+因此，此索引可用来搜索下列的列组合：
+MySQL 不能使用不涉及左前缀的搜索。例如，如果按 city 或 zip 进行搜索，则不能使用该索引。如果要搜索某个州以及某个 zip 代码（索引中的列1和列3），
+则此索引不能用于相应值的组合。但是，可利用索引来寻找与该州相符的行，以减少搜索范围。
+5、不要过度索引
+不要以为索引“越多越好”，什么东西都用索引是错的。每个额外的索引都要占用额外的磁盘空间，并降低写操作的性能，这一点我们前面已经介绍过。
+在修改表的内容时，索引必须进行更新，有时可能需要重构，因此，索引越多，所花的时间越长。
+如果有一个索引很少利用或从不使用，那么会不必要地减缓表的修改速度。此外，MySQL 在生成一个执行计划时，要考虑各个索引，这也要费时间。
+创建多余的索引给查询优化带来了更多的工作。索引太多，也可能会使 MySQL 选择不到所要使用的最好索引。只保持所需的索引有利于查询优化。
+如果想给已索引的表增加索引，应该考虑所要增加的索引是否是现有多列索引的最左索引。如果是，则就不要费力去增加这个索引了，因为已经有了。
+6、考虑在列上进行的比较类型
+索引可用于“&lt;”、“&lt;=”、“=”、“&gt;=”、“&gt;”和 BETWEEN 运算。在模式具有一个直接量前缀时，索引也用于 LIKE 运算。如果只将某个列用于其他类型的运算时（如 STRCMP( )），对其进行索引没有价值。</p>
+
+<p>补充：
+MySQL建立部分索引代码&ndash;即短索引</p>
+
+<p>&ndash; 计算部分索引平均值
+SELECT COUNT(DISTINCT t.show_sentence)/COUNT(1) from t_user_show t;</p>
+
+<p>&ndash; 找出部分索引最佳长度（得到结果与平均值相近）
+SELECT COUNT(DISTINCT LEFT(t.show_sentence,10) )/COUNT(<em>) as sel10,
+COUNT(DISTINCT LEFT(t.show_sentence,20) )/COUNT(</em>) as sel20,
+COUNT(DISTINCT LEFT(t.show_sentence,30) )/COUNT(<em>) as sel30,
+COUNT(DISTINCT LEFT(t.show_sentence,40) )/COUNT(</em>) as sel40 from t_user_show t;</p>
+
+<p>平均值 == 得到结果与平均值相近</p>
+
+<p>&ndash; 建部分索引语句
+ALTER TABLE t_user_show add key (show_sentence(40));</p>
+
+        </div>
+
+        
+        
+        <div class="article-toc" >
+            <h3>Contents</h3>
+            <nav id="TableOfContents">
+<ul>
+<li><a href="#一-mysql索引类型">一. MySQL索引类型：</a>
+<ul>
+<li><a href="#1-普通索引">1. 普通索引</a></li>
+<li><a href="#2-唯一性索引">2. 唯一性索引</a></li>
+<li><a href="#3-主键">3. 主键</a></li>
+<li><a href="#4-全文索引">4. 全文索引</a></li>
+</ul></li>
+<li><a href="#二-单列索引与多列索引">二、单列索引与多列索引</a>
+<ul>
+<li><a href="#1-最左前缀">1. 最左前缀</a></li>
+<li><a href="#2-选择索引列">2. 选择索引列</a></li>
+<li><a href="#3-分析索引效率">3. 分析索引效率</a></li>
+</ul></li>
+</ul>
+</nav>
+        </div>
+        
+        
+
+        
+
+
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://oquamnib.github.io//tags/mysql">MySQL
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
+        
+    </div>
+    <nav id="article-nav">
+    
+    
+    <a href="/post/factory-method-pattern/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">工厂方法模式-Factory Methond Pattern&nbsp;<span>&gt;</span></div>
+    </a>
+    
+</nav>
+</article>
+
+        
+            
+        
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2019
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+    </script>
+</footer>
+</div>
+</body>
+</html>
