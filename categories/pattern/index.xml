@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pattern on 编程笔记</title>
-    <link>https://churwebber.github.io/categories/pattern/</link>
+    <link>https://oquamnib.github.io/categories/pattern/</link>
     <description>Recent content in Pattern on 编程笔记</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 27 Aug 2018 16:03:11 +0000</lastBuildDate>
     
-	<atom:link href="https://churwebber.github.io/categories/pattern/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://oquamnib.github.io/categories/pattern/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>工厂方法模式-Factory Methond Pattern</title>
-      <link>https://churwebber.github.io/post/factory-method-pattern/</link>
+      <link>https://oquamnib.github.io/post/factory-method-pattern/</link>
       <pubDate>Mon, 27 Aug 2018 16:03:11 +0000</pubDate>
       
-      <guid>https://churwebber.github.io/post/factory-method-pattern/</guid>
+      <guid>https://oquamnib.github.io/post/factory-method-pattern/</guid>
       <description>&lt;p&gt;简单工厂模式虽然简单，但存在一个很严重的问题。&lt;strong&gt;当系统中需要引入新产品时，由于静态工厂方法通过所传入参数的不同来创建不同的产品，这必定要修改工厂类的源代码，将违背“开闭原则”，如何实现增加新产品而不影响已有代码？&lt;/strong&gt;工厂方法模式应运而生，本文将介绍第二种工厂模式——工厂方法模式。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>简单工厂模式-Simple Factory Pattern</title>
-      <link>https://churwebber.github.io/post/simple-factory-pattern/</link>
+      <link>https://oquamnib.github.io/post/simple-factory-pattern/</link>
       <pubDate>Sun, 26 Aug 2018 16:03:11 +0000</pubDate>
       
-      <guid>https://churwebber.github.io/post/simple-factory-pattern/</guid>
+      <guid>https://oquamnib.github.io/post/simple-factory-pattern/</guid>
       <description>&lt;p&gt;工厂模式是最常用的一类创建型设计模式，通常我们所说的工厂模式是指&lt;strong&gt;工厂方法模式&lt;/strong&gt;，它也是使用频率最高的工厂模式。本章将要学习的&lt;strong&gt;简单工厂模式&lt;/strong&gt;是工厂方法模式的“小弟”，它不属于GoF 23种设计模式，但在软件开发中应用也较为频繁，通常将它作为学习其他工厂模式的入门。此外，工厂方法模式还有一位“大哥”——&lt;strong&gt;抽象工厂模式&lt;/strong&gt;。这三种工厂模式各具特色，难度也逐个加大，在软件开发中它们都得到了广泛的应用，成为面向对象软件中常用的创建对象的工具。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

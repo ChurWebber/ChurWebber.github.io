@@ -13,16 +13,16 @@
     <meta property="og:description" content="A blog about everything." />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:url" content="https://churwebber.github.io/" />
+    <meta property="og:url" content="https://oquamnib.github.io/" />
     
 
     <link href="" rel="alternate" type="application/rss+xml" title="编程笔记" />
     <link rel="shortcut icon" href="/favicon.png">
 
-    <link href="https://churwebber.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://churwebber.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="https://oquamnib.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://oquamnib.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="https://churwebber.github.io/css/style.css">
+    <link rel="stylesheet" href="https://oquamnib.github.io/css/style.css">
 
     <link href="http://gmpg.org/xfn/11" rel="profile">
     
@@ -35,7 +35,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://churwebber.github.io/">编程笔记</a>
+            <a id="logo" class="logo-text" href="https://oquamnib.github.io/">编程笔记</a>
             <nav id="main-nav">
                 
             </nav>
@@ -47,6 +47,62 @@
     </div>
 </header>
     <section id="main" class="outer">
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="/post/mysql-index-basics/">MYSQL索引基础知识</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="/post/mysql-index-basics/" class="article-date">
+                        <time datetime='2019-01-08T15:03:11.000&#43;00:00' itemprop="datePublished">2019-01-08</time>
+                    </a>
+                    
+                    
+                    <div class="post-categories">
+                        <div class="article-category">
+                            
+                            
+                            <a class="article-category-link" href="https://oquamnib.github.io//categories/mysql">MySQL</a>
+                            
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="article-comment-link-wrap">
+                        <a href="/post/mysql-index-basics/#disqus_thread" class="article-comment-link">Comments</a>
+                    </div>
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    一. MySQL索引类型： 1. 普通索引 这是最基本的索引类型，而且它没有唯一性之类的限制。普通索引可以通过以下几种方式创建：
+ 创建索引，例如 CREATE INDEX &lt;索引的名字&gt; ON tablename (列的列表); 修改表，例如 ALTER TABLE tablename ADD INDEX [索引的名字] (列的列表); 创建表的时候指定索引，例如 CREATE TABLE tablename ( [...], INDEX [索引的名字] (列的列表) );  2. 唯一性索引 这种索引和前面的“普通索引”基本相同，但有一个区别：索引列的所有值都只能出现一次，即必须唯一。唯一性索引可以用以下几种方式创建：
+ 创建索引，例如 CREATE UNIQUE INDEX &lt;索引的名字&gt; ON tablename (列的列表); 修改表，例如 ALTER TABLE tablename ADD UNIQUE [索引的名字] (列的列表); 创建表的时候指定索引，例如 CREATE TABLE tablename ( [...], UNIQUE [索引的名字] (列的列表) );  3. 主键 主键是一种唯一性索引，但它必须指定为“PRIMARY KEY”。如果你曾经用过AUTO_INCREMENT类型的列，你可能已经熟悉主键之类的概念了。 主键一般在创建表的时候指定，例如“CREATE TABLE tablename ( [&hellip;], PRIMARY KEY (列的列表) ); ”。 但是，我们也可以通过修改表的方式加入主键，例如“ALTER TABLE tablename ADD PRIMARY KEY (列的列表); ”。每个表只能有一个主键。
+                    </p>
+                    <p class="article-more-link">
+                        <a href="/post/mysql-index-basics/">Read More</a>
+                    </p>
+                </div>
+
+                
+                <footer class="article-footer">
+                    <ul class="article-tag-list">
+                        
+                        <li class="article-tag-list-item">
+                            <a class="article-tag-list-link" href="https://oquamnib.github.io//tags/mysql">MySQL
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </footer>
+                
+            </div>
+        </article>
         
         <article class="article article-type-post" itemscope itemprop="blogPost">
             <div class="article-inner">
@@ -66,7 +122,7 @@
                         <div class="article-category">
                             
                             
-                            <a class="article-category-link" href="https://churwebber.github.io//categories/pattern">Pattern</a>
+                            <a class="article-category-link" href="https://oquamnib.github.io//categories/pattern">Pattern</a>
                             
                         </div>
                     </div>
@@ -94,7 +150,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://churwebber.github.io//tags/pattern">Pattern
+                            <a class="article-tag-list-link" href="https://oquamnib.github.io//tags/pattern">Pattern
                             </a>
                         </li>
                         
@@ -122,7 +178,7 @@
                         <div class="article-category">
                             
                             
-                            <a class="article-category-link" href="https://churwebber.github.io//categories/pattern">Pattern</a>
+                            <a class="article-category-link" href="https://oquamnib.github.io//categories/pattern">Pattern</a>
                             
                         </div>
                     </div>
@@ -150,7 +206,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://churwebber.github.io//tags/pattern">Pattern
+                            <a class="article-tag-list-link" href="https://oquamnib.github.io//tags/pattern">Pattern
                             </a>
                         </li>
                         
@@ -178,7 +234,7 @@
                         <div class="article-category">
                             
                             
-                            <a class="article-category-link" href="https://churwebber.github.io//categories/php">PHP</a>
+                            <a class="article-category-link" href="https://oquamnib.github.io//categories/php">PHP</a>
                             
                         </div>
                     </div>
@@ -216,65 +272,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://churwebber.github.io//tags/psr">PSR
-                            </a>
-                        </li>
-                        
-                    </ul>
-                </footer>
-                
-            </div>
-        </article>
-        
-        <article class="article article-type-post" itemscope itemprop="blogPost">
-            <div class="article-inner">
-                
-                
-                <header class="article-header">
-                    <h1 itemprop="name"><a class="article-title" href="/post/psr-1/">PSR规范 PSR-1 基础编码规范</a></h1>
-                </header>
-                
-                <div class="article-meta">
-                    <a href="/post/psr-1/" class="article-date">
-                        <time datetime='2018-07-23T15:03:11.000&#43;00:00' itemprop="datePublished">2018-07-23</time>
-                    </a>
-                    
-                    
-                    <div class="post-categories">
-                        <div class="article-category">
-                            
-                            
-                            <a class="article-category-link" href="https://churwebber.github.io//categories/php">PHP</a>
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="article-comment-link-wrap">
-                        <a href="/post/psr-1/#disqus_thread" class="article-comment-link">Comments</a>
-                    </div>
-                    
-                </div>
-                <div class="article-entry" itemprop="articleBody">
-                    <p>
-                        
-                    <h1 id="基本代码规范">基本代码规范</h1>
-
-<p>本篇规范制定了代码基本元素的相关标准，以确保共享的PHP代码间具有较高程度的技术互通性。</p>
-
-<p></p>
-                    </p>
-                    <p class="article-more-link">
-                        <a href="/post/psr-1/">Read More</a>
-                    </p>
-                </div>
-
-                
-                <footer class="article-footer">
-                    <ul class="article-tag-list">
-                        
-                        <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://churwebber.github.io//tags/psr">PSR
+                            <a class="article-tag-list-link" href="https://oquamnib.github.io//tags/psr">PSR
                             </a>
                         </li>
                         
@@ -308,7 +306,7 @@
     <footer id="footer">
     <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018
+            &copy; 2019
         </div>
     </div>
     
