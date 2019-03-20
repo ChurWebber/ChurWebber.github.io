@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>编程笔记</title>
+    <title>Oun&#39;s Notes</title>
 
         <meta charset="utf-8">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -9,14 +9,14 @@
     <meta name="description" content="A blog about everything.">
     <meta name="keywords" content="">
     <meta name="author" content="">
-        <meta property="og:title" content="编程笔记" />
+        <meta property="og:title" content="Oun&#39;s Notes" />
     <meta property="og:description" content="A blog about everything." />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://oquamnib.github.io/" />
     
 
-    <link href="" rel="alternate" type="application/rss+xml" title="编程笔记" />
+    <link href="" rel="alternate" type="application/rss+xml" title="Oun&#39;s Notes" />
     <link rel="shortcut icon" href="/favicon.png">
 
     <link href="https://oquamnib.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
@@ -35,7 +35,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://oquamnib.github.io/">编程笔记</a>
+            <a id="logo" class="logo-text" href="https://oquamnib.github.io/">Oun&#39;s Notes</a>
             <nav id="main-nav">
                 
             </nav>
@@ -53,12 +53,12 @@
                 
                 
                 <header class="article-header">
-                    <h1 itemprop="name"><a class="article-title" href="/post/mysql-index-basics/">MYSQL索引基础知识</a></h1>
+                    <h1 itemprop="name"><a class="article-title" href="/post/learning-css/">CSS 流式布局</a></h1>
                 </header>
                 
                 <div class="article-meta">
-                    <a href="/post/mysql-index-basics/" class="article-date">
-                        <time datetime='2019-01-08T15:03:11.000&#43;00:00' itemprop="datePublished">2019-01-08</time>
+                    <a href="/post/learning-css/" class="article-date">
+                        <time datetime='2019-03-19T16:03:11.000&#43;00:00' itemprop="datePublished">2019-03-19</time>
                     </a>
                     
                     
@@ -66,82 +66,26 @@
                         <div class="article-category">
                             
                             
-                            <a class="article-category-link" href="https://oquamnib.github.io//categories/mysql">MySQL</a>
+                            <a class="article-category-link" href="https://oquamnib.github.io//categories/learning">Learning</a>
                             
                         </div>
                     </div>
                     
                     
                     <div class="article-comment-link-wrap">
-                        <a href="/post/mysql-index-basics/#disqus_thread" class="article-comment-link">Comments</a>
+                        <a href="/post/learning-css/#disqus_thread" class="article-comment-link">Comments</a>
                     </div>
                     
                 </div>
                 <div class="article-entry" itemprop="articleBody">
                     <p>
                         
-                    一. MySQL索引类型： 1. 普通索引 这是最基本的索引类型，而且它没有唯一性之类的限制。普通索引可以通过以下几种方式创建：
- 创建索引，例如 CREATE INDEX &lt;索引的名字&gt; ON tablename (列的列表); 修改表，例如 ALTER TABLE tablename ADD INDEX [索引的名字] (列的列表); 创建表的时候指定索引，例如 CREATE TABLE tablename ( [...], INDEX [索引的名字] (列的列表) );  2. 唯一性索引 这种索引和前面的“普通索引”基本相同，但有一个区别：索引列的所有值都只能出现一次，即必须唯一。唯一性索引可以用以下几种方式创建：
- 创建索引，例如 CREATE UNIQUE INDEX &lt;索引的名字&gt; ON tablename (列的列表); 修改表，例如 ALTER TABLE tablename ADD UNIQUE [索引的名字] (列的列表); 创建表的时候指定索引，例如 CREATE TABLE tablename ( [...], UNIQUE [索引的名字] (列的列表) );  3. 主键 主键是一种唯一性索引，但它必须指定为“PRIMARY KEY”。如果你曾经用过AUTO_INCREMENT类型的列，你可能已经熟悉主键之类的概念了。 主键一般在创建表的时候指定，例如“CREATE TABLE tablename ( [&hellip;], PRIMARY KEY (列的列表) ); ”。 但是，我们也可以通过修改表的方式加入主键，例如“ALTER TABLE tablename ADD PRIMARY KEY (列的列表); ”。每个表只能有一个主键。
-                    </p>
-                    <p class="article-more-link">
-                        <a href="/post/mysql-index-basics/">Read More</a>
-                    </p>
-                </div>
-
-                
-                <footer class="article-footer">
-                    <ul class="article-tag-list">
-                        
-                        <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://oquamnib.github.io//tags/mysql">MySQL
-                            </a>
-                        </li>
-                        
-                    </ul>
-                </footer>
-                
-            </div>
-        </article>
-        
-        <article class="article article-type-post" itemscope itemprop="blogPost">
-            <div class="article-inner">
-                
-                
-                <header class="article-header">
-                    <h1 itemprop="name"><a class="article-title" href="/post/factory-method-pattern/">工厂方法模式-Factory Methond Pattern</a></h1>
-                </header>
-                
-                <div class="article-meta">
-                    <a href="/post/factory-method-pattern/" class="article-date">
-                        <time datetime='2018-08-27T16:03:11.000&#43;00:00' itemprop="datePublished">2018-08-27</time>
-                    </a>
-                    
-                    
-                    <div class="post-categories">
-                        <div class="article-category">
-                            
-                            
-                            <a class="article-category-link" href="https://oquamnib.github.io//categories/pattern">Pattern</a>
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="article-comment-link-wrap">
-                        <a href="/post/factory-method-pattern/#disqus_thread" class="article-comment-link">Comments</a>
-                    </div>
-                    
-                </div>
-                <div class="article-entry" itemprop="articleBody">
-                    <p>
-                        
-                    <p>简单工厂模式虽然简单，但存在一个很严重的问题。<strong>当系统中需要引入新产品时，由于静态工厂方法通过所传入参数的不同来创建不同的产品，这必定要修改工厂类的源代码，将违背“开闭原则”，如何实现增加新产品而不影响已有代码？</strong>工厂方法模式应运而生，本文将介绍第二种工厂模式——工厂方法模式。</p>
+                    <p>&ldquo;文档流&rdquo;或&rdquo;流式布局&rdquo;是在对布局进行任何更改之前，在页面上显示&rdquo;块&rdquo;和&rdquo;内联&rdquo;元素的方式。 这个&rdquo;流&rdquo;本质上是一系列的事物，它们都在你的布局中一起工作，并且互相了解。 一旦某部分脱离了&rdquo;流&rdquo;，它就会独立地工作。</p>
 
 <p></p>
                     </p>
                     <p class="article-more-link">
-                        <a href="/post/factory-method-pattern/">Read More</a>
+                        <a href="/post/learning-css/">Read More</a>
                     </p>
                 </div>
 
@@ -150,129 +94,7 @@
                     <ul class="article-tag-list">
                         
                         <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://oquamnib.github.io//tags/pattern">Pattern
-                            </a>
-                        </li>
-                        
-                    </ul>
-                </footer>
-                
-            </div>
-        </article>
-        
-        <article class="article article-type-post" itemscope itemprop="blogPost">
-            <div class="article-inner">
-                
-                
-                <header class="article-header">
-                    <h1 itemprop="name"><a class="article-title" href="/post/simple-factory-pattern/">简单工厂模式-Simple Factory Pattern</a></h1>
-                </header>
-                
-                <div class="article-meta">
-                    <a href="/post/simple-factory-pattern/" class="article-date">
-                        <time datetime='2018-08-26T16:03:11.000&#43;00:00' itemprop="datePublished">2018-08-26</time>
-                    </a>
-                    
-                    
-                    <div class="post-categories">
-                        <div class="article-category">
-                            
-                            
-                            <a class="article-category-link" href="https://oquamnib.github.io//categories/pattern">Pattern</a>
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="article-comment-link-wrap">
-                        <a href="/post/simple-factory-pattern/#disqus_thread" class="article-comment-link">Comments</a>
-                    </div>
-                    
-                </div>
-                <div class="article-entry" itemprop="articleBody">
-                    <p>
-                        
-                    <p>工厂模式是最常用的一类创建型设计模式，通常我们所说的工厂模式是指<strong>工厂方法模式</strong>，它也是使用频率最高的工厂模式。本章将要学习的<strong>简单工厂模式</strong>是工厂方法模式的“小弟”，它不属于GoF 23种设计模式，但在软件开发中应用也较为频繁，通常将它作为学习其他工厂模式的入门。此外，工厂方法模式还有一位“大哥”——<strong>抽象工厂模式</strong>。这三种工厂模式各具特色，难度也逐个加大，在软件开发中它们都得到了广泛的应用，成为面向对象软件中常用的创建对象的工具。</p>
-
-<p></p>
-                    </p>
-                    <p class="article-more-link">
-                        <a href="/post/simple-factory-pattern/">Read More</a>
-                    </p>
-                </div>
-
-                
-                <footer class="article-footer">
-                    <ul class="article-tag-list">
-                        
-                        <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://oquamnib.github.io//tags/pattern">Pattern
-                            </a>
-                        </li>
-                        
-                    </ul>
-                </footer>
-                
-            </div>
-        </article>
-        
-        <article class="article article-type-post" itemscope itemprop="blogPost">
-            <div class="article-inner">
-                
-                
-                <header class="article-header">
-                    <h1 itemprop="name"><a class="article-title" href="/post/psr-2/">PSR规范 PSR-2 编码风格规范</a></h1>
-                </header>
-                
-                <div class="article-meta">
-                    <a href="/post/psr-2/" class="article-date">
-                        <time datetime='2018-07-30T15:03:11.000&#43;00:00' itemprop="datePublished">2018-07-30</time>
-                    </a>
-                    
-                    
-                    <div class="post-categories">
-                        <div class="article-category">
-                            
-                            
-                            <a class="article-category-link" href="https://oquamnib.github.io//categories/php">PHP</a>
-                            
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="article-comment-link-wrap">
-                        <a href="/post/psr-2/#disqus_thread" class="article-comment-link">Comments</a>
-                    </div>
-                    
-                </div>
-                <div class="article-entry" itemprop="articleBody">
-                    <p>
-                        
-                    <h1 id="编码风格指南">编码风格指南</h1>
-
-<p>本篇规范是 [PSR-1][] 基本代码规范的继承与扩展。</p>
-
-<p>本规范希望通过制定一系列规范化PHP代码的规则，以减少在浏览不同作者的代码时，因代码风格的不同而造成不便。</p>
-
-<p>当多名程序员在多个项目中合作时，就需要一个共同的编码规范，</p>
-
-<p>而本文中的风格规范源自于多个不同项目代码风格的共同特性，</p>
-
-<p>因此，本规范的价值在于我们都遵循这个编码风格，而不是在于它本身。</p>
-
-<p></p>
-                    </p>
-                    <p class="article-more-link">
-                        <a href="/post/psr-2/">Read More</a>
-                    </p>
-                </div>
-
-                
-                <footer class="article-footer">
-                    <ul class="article-tag-list">
-                        
-                        <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://oquamnib.github.io//tags/psr">PSR
+                            <a class="article-tag-list-link" href="https://oquamnib.github.io//tags/css">CSS
                             </a>
                         </li>
                         
@@ -284,23 +106,6 @@
         
 
         
-
-<nav id="page-nav">
-    
-    
-    
-    <span class="page-number current">1</span>
-    
-    
-    
-    <a href="/page/2/">2</a>
-    
-    
-
-    
-    <a href="/page/2/" rel="next" class="extend next">Next &raquo;</a>
-    
-</nav>
 
     </section>
     <footer id="footer">

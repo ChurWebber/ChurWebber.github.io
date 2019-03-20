@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on 编程笔记</title>
+    <title>Categories on Oun&#39;s Notes</title>
     <link>https://oquamnib.github.io/categories/</link>
-    <description>Recent content in Categories on 编程笔记</description>
+    <description>Recent content in Categories on Oun&#39;s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
@@ -11,29 +11,11 @@
     
     
     <item>
-      <title>Mysql</title>
-      <link>https://oquamnib.github.io/categories/mysql/</link>
-      <pubDate>Tue, 08 Jan 2019 15:03:11 +0000</pubDate>
+      <title>Learning</title>
+      <link>https://oquamnib.github.io/categories/learning/</link>
+      <pubDate>Tue, 19 Mar 2019 16:03:11 +0000</pubDate>
       
-      <guid>https://oquamnib.github.io/categories/mysql/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Pattern</title>
-      <link>https://oquamnib.github.io/categories/pattern/</link>
-      <pubDate>Mon, 27 Aug 2018 16:03:11 +0000</pubDate>
-      
-      <guid>https://oquamnib.github.io/categories/pattern/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Php</title>
-      <link>https://oquamnib.github.io/categories/php/</link>
-      <pubDate>Mon, 30 Jul 2018 15:03:11 +0000</pubDate>
-      
-      <guid>https://oquamnib.github.io/categories/php/</guid>
+      <guid>https://oquamnib.github.io/categories/learning/</guid>
       <description></description>
     </item>
     
