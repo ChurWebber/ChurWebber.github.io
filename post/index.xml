@@ -6,18 +6,60 @@
     <description>Recent content in Posts on Oun&#39;s Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 19 Mar 2019 16:03:11 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 Mar 2019 15:03:11 +0000</lastBuildDate>
     
 	<atom:link href="https://oquamnib.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>CSS 流式布局</title>
-      <link>https://oquamnib.github.io/post/learning-css/</link>
-      <pubDate>Tue, 19 Mar 2019 16:03:11 +0000</pubDate>
+      <title>MySQL开发实践</title>
+      <link>https://oquamnib.github.io/post/mysql-questions/</link>
+      <pubDate>Mon, 25 Mar 2019 15:03:11 +0000</pubDate>
       
-      <guid>https://oquamnib.github.io/post/learning-css/</guid>
-      <description>&lt;p&gt;&amp;ldquo;文档流&amp;rdquo;或&amp;rdquo;流式布局&amp;rdquo;是在对布局进行任何更改之前，在页面上显示&amp;rdquo;块&amp;rdquo;和&amp;rdquo;内联&amp;rdquo;元素的方式。 这个&amp;rdquo;流&amp;rdquo;本质上是一系列的事物，它们都在你的布局中一起工作，并且互相了解。 一旦某部分脱离了&amp;rdquo;流&amp;rdquo;，它就会独立地工作。&lt;/p&gt;
+      <guid>https://oquamnib.github.io/post/mysql-questions/</guid>
+      <description>&lt;h2 id=&#34;1-mysql读写性能是多少-有哪些性能相关的重要参数&#34;&gt;1. MySQL读写性能是多少，有哪些性能相关的重要参数？&lt;/h2&gt;
+
+&lt;p&gt;这里做了几个简单压测实验&lt;/p&gt;
+
+&lt;p&gt;机器：8核CPU，8G内存
+表结构(尽量模拟业务)：12个字段(1个bigint(20)为自增primary key，5个int(11)，5个varchar(512)，1个timestamp)，InnoDB存储引擎。
+实验1(写)：insert =&amp;gt; 6000/s
+前提：连接数100，每次insert单条记录
+分析：CPU跑了50%，这时磁盘为顺序写，故性能较高&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PSR规范 PSR-2 编码风格规范</title>
+      <link>https://oquamnib.github.io/post/psr-2/</link>
+      <pubDate>Mon, 30 Jul 2018 15:03:11 +0000</pubDate>
+      
+      <guid>https://oquamnib.github.io/post/psr-2/</guid>
+      <description>&lt;h2 id=&#34;编码风格指南&#34;&gt;编码风格指南&lt;/h2&gt;
+
+&lt;p&gt;本篇规范是 [PSR-1][] 基本代码规范的继承与扩展。&lt;/p&gt;
+
+&lt;p&gt;本规范希望通过制定一系列规范化PHP代码的规则，以减少在浏览不同作者的代码时，因代码风格的不同而造成不便。&lt;/p&gt;
+
+&lt;p&gt;当多名程序员在多个项目中合作时，就需要一个共同的编码规范，&lt;/p&gt;
+
+&lt;p&gt;而本文中的风格规范源自于多个不同项目代码风格的共同特性，&lt;/p&gt;
+
+&lt;p&gt;因此，本规范的价值在于我们都遵循这个编码风格，而不是在于它本身。&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PSR规范 PSR-1 基础编码规范</title>
+      <link>https://oquamnib.github.io/post/psr-1/</link>
+      <pubDate>Mon, 23 Jul 2018 15:03:11 +0000</pubDate>
+      
+      <guid>https://oquamnib.github.io/post/psr-1/</guid>
+      <description>&lt;h2 id=&#34;基本代码规范&#34;&gt;基本代码规范&lt;/h2&gt;
+
+&lt;p&gt;本篇规范制定了代码基本元素的相关标准，以确保共享的PHP代码间具有较高程度的技术互通性。&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
     </item>

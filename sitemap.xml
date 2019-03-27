@@ -3,8 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://oquamnib.github.io/post/learning-css/</loc>
-    <lastmod>2019-03-19T16:03:11+00:00</lastmod>
+    <loc>https://oquamnib.github.io/post/mysql-questions/</loc>
+    <lastmod>2019-03-25T15:03:11+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://oquamnib.github.io/post/psr-2/</loc>
+    <lastmod>2018-07-30T15:03:11+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://oquamnib.github.io/post/psr-1/</loc>
+    <lastmod>2018-07-23T15:03:11+00:00</lastmod>
   </url>
   
   <url>
@@ -13,32 +23,44 @@
   </url>
   
   <url>
-    <loc>https://oquamnib.github.io/tags/css/</loc>
-    <lastmod>2019-03-19T16:03:11+00:00</lastmod>
+    <loc>https://oquamnib.github.io/categories/learning/</loc>
+    <lastmod>2019-03-25T15:03:11+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://oquamnib.github.io/categories/learning/</loc>
-    <lastmod>2019-03-19T16:03:11+00:00</lastmod>
+    <loc>https://oquamnib.github.io/tags/mysql/</loc>
+    <lastmod>2019-03-25T15:03:11+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://oquamnib.github.io/</loc>
-    <lastmod>2019-03-19T16:03:11+00:00</lastmod>
+    <lastmod>2019-03-25T15:03:11+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://oquamnib.github.io/categories/php/</loc>
+    <lastmod>2018-07-30T15:03:11+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://oquamnib.github.io/post/</loc>
-    <lastmod>2019-03-19T16:03:11+00:00</lastmod>
+    <lastmod>2019-03-25T15:03:11+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://oquamnib.github.io/tags/psr/</loc>
+    <lastmod>2018-07-30T15:03:11+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://oquamnib.github.io/tags/</loc>
-    <lastmod>2019-03-19T16:03:11+00:00</lastmod>
+    <lastmod>2019-03-25T15:03:11+00:00</lastmod>
     <priority>0</priority>
   </url>
   
