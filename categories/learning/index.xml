@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Learning on Oun&#39;s Notes</title>
+    <link>https://oquamnib.github.io/categories/learning/</link>
+    <description>Recent content in Learning on Oun&#39;s Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 25 Mar 2019 15:03:11 +0000</lastBuildDate>
+    
+	<atom:link href="https://oquamnib.github.io/categories/learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MySQL开发实践</title>
+      <link>https://oquamnib.github.io/post/mysql-questions/</link>
+      <pubDate>Mon, 25 Mar 2019 15:03:11 +0000</pubDate>
+      
+      <guid>https://oquamnib.github.io/post/mysql-questions/</guid>
+      <description>&lt;h2 id=&#34;1-mysql读写性能是多少-有哪些性能相关的重要参数&#34;&gt;1. MySQL读写性能是多少，有哪些性能相关的重要参数？&lt;/h2&gt;
+
+&lt;p&gt;这里做了几个简单压测实验&lt;/p&gt;
+
+&lt;p&gt;机器：8核CPU，8G内存
+表结构(尽量模拟业务)：12个字段(1个bigint(20)为自增primary key，5个int(11)，5个varchar(512)，1个timestamp)，InnoDB存储引擎。
+实验1(写)：insert =&amp;gt; 6000/s
+前提：连接数100，每次insert单条记录
+分析：CPU跑了50%，这时磁盘为顺序写，故性能较高&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
